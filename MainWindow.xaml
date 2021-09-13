@@ -8,14 +8,14 @@
         mc:Ignorable="d"
         Title="x360Tool | Not Connected" Height="450" Width="800"
         xmlns:controls="http://schemas.modernwpf.com/2019"
-        controls:WindowHelper.UseModernWindowStyle="True" ResizeMode="CanMinimize" Icon="x360.png">
+        controls:WindowHelper.UseModernWindowStyle="True" ResizeMode="CanMinimize" Icon="Resources/x360.png">
     <controls:SimpleStackPanel Margin="0,10,4,2" Spacing="24">
         <TextBlock Text="x360Tool" Style="{StaticResource HeaderTextBlockStyle}" Margin="88,-9,499,7.366" />
         <Button Content="Games" Margin="305,-64,0,64" Width="60" />
         <Button Content="Utility" Margin="381,-120,0,120" Width="60" />
         <Button Content="About" Margin="457,-176,0,176" Width="60" />
         <Button Content="Connect" Style="{StaticResource AccentButtonStyle}" Margin="256,-104,0,104" Click="ConnectButton_OnClick" Name ="connectButton" />
-        <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="64" Margin="10,-308,0,0" Source="x360.png"/>
+        <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="64" Margin="10,-308,0,0" Source="Resources/x360.png"/>
         <Border BorderBrush="LimeGreen" BorderThickness="1" HorizontalAlignment="Left" Height="1" Margin="10,-255,0,0" VerticalAlignment="Top" Width="507"/>
         <TextBlock Text="Connect to console" Style="{StaticResource HeaderTextBlockStyle}" Margin="10,-266,572,265" FontSize="24" />
         <TextBlock Text="Leave field blank to connect to default console." Style="{StaticResource HeaderTextBlockStyle}" Margin="10,-289,539,288" FontSize="12" />
@@ -31,7 +31,7 @@
             <ComboBoxItem Content="MB Temp:" FontSize="11"/>
         </ListBox>
         <TextBlock Text="Current Title" Style="{StaticResource HeaderTextBlockStyle}" Margin="559,-452,104,449.859" FontSize="24" />
-        <Image HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="105" Margin="559,-432,0,0" Source="bo2.jpg"/>
+        <Image HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="105" Margin="559,-432,0,0" Source="Resources/bo2.jpg"/>
         <TextBlock Text="Name: Call of Duty®: Black Ops II" Style="{StaticResource HeaderTextBlockStyle}" Margin="559,-492.782,48,491.222" FontSize="12" />
         <TextBlock Text="ID: 415608C3" Style="{StaticResource HeaderTextBlockStyle}" Margin="559,-515.182,155,513.822" FontSize="12" />
         <Button Content="Q" Style="{StaticResource AccentButtonStyle}" Margin="693,-602,0,606" Height="28" Width="33" FontFamily="Wingdings 3" FontSize="16" />
@@ -42,7 +42,7 @@
         <ComboBox HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="83" Margin="12,-665,0,0"/>
         <Border BorderBrush="LimeGreen" BorderThickness="1" HorizontalAlignment="Left" Height="1" Margin="12,-712,0,0" VerticalAlignment="Top" Width="315"/>
         <TextBlock Text="Message" Style="{StaticResource HeaderTextBlockStyle}" Margin="100,-730.834,607,728.434" FontSize="10" />
-        <ui:ProgressRing x:Name="progress1" Margin="333,-963,425,931" Height="32" Width="32"/>
+        <ui:ProgressRing x:Name="connectProgressRing" Margin="333,-963,425,931" Height="32" Width="32"/>
 
     </controls:SimpleStackPanel>
 </Window>

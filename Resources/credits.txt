@@ -1,0 +1,4 @@
+﻿FYI: This will later be implemented into the application. This is where credits are stored for now.
+
+https://github.com/Kinnara/ModernWpf
+https://github.com/XboxVillain/JRPC
