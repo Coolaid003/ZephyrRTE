@@ -118,6 +118,7 @@
   <ItemGroup>
     <Content Include="DLLs\JRPC.dll" />
     <Content Include="DLLs\xdevkit.dll" />
+    <Resource Include="Resources\zephyr.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

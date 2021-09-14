@@ -6,41 +6,40 @@
         xmlns:local="clr-namespace:x360Tool"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         mc:Ignorable="d"
-        Title="x360Tool | Not Connected" Height="450" Width="800"
+        Title="ZephyrRTE | Not Connected" Height="450" Width="800"
         xmlns:controls="http://schemas.modernwpf.com/2019"
         controls:WindowHelper.UseModernWindowStyle="True" ResizeMode="CanMinimize" Icon="Resources/x360.png">
     <controls:SimpleStackPanel Margin="0,10,4,2" Spacing="24">
-        <TextBlock Text="x360Tool" Style="{StaticResource HeaderTextBlockStyle}" Margin="88,-9,499,7.366" />
+        <TextBlock Text="ZephyrRTE" Style="{StaticResource HeaderTextBlockStyle}" Margin="88,-9,490,7" FontSize="44" />
         <Button Content="Games" Margin="305,-64,0,64" Width="60" />
         <Button Content="Utility" Margin="381,-120,0,120" Width="60" />
         <Button Content="About" Margin="457,-176,0,176" Width="60" />
-        <Button Content="Connect" Style="{StaticResource AccentButtonStyle}" Margin="256,-104,0,104" Click="ConnectButton_OnClick" Name ="connectButton" />
-        <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="64" Margin="10,-308,0,0" Source="Resources/x360.png"/>
-        <Border BorderBrush="LimeGreen" BorderThickness="1" HorizontalAlignment="Left" Height="1" Margin="10,-255,0,0" VerticalAlignment="Top" Width="507"/>
+        <Button Content="Connect" Style="{StaticResource AccentButtonStyle}" Margin="256,-104,0,104" Click="ConnectButton_OnClick" Name ="connectButton" Background="#FF4732CD" />
+        <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="64" Margin="10,-304,0,0" Source="Resources/zephyr.png" RenderTransformOrigin="0.453,0.953"/>
+        <Border BorderBrush="#FF4732CD" BorderThickness="1" HorizontalAlignment="Left" Height="1" Margin="10,-255,0,0" VerticalAlignment="Top" Width="507"/>
         <TextBlock Text="Connect to console" Style="{StaticResource HeaderTextBlockStyle}" Margin="10,-266,572,265" FontSize="24" />
         <TextBlock Text="Leave field blank to connect to default console." Style="{StaticResource HeaderTextBlockStyle}" Margin="10,-289,539,288" FontSize="12" />
         <TextBlock Text="By: Karma Kitten#1708" Style="{StaticResource HeaderTextBlockStyle}" Margin="88,-397.92,371,396.9" FontSize="12" />
         <TextBox HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207" Margin="44,-340.82,0,0" Name="addyInput"/>
         <TextBlock Text="IP:" Style="{StaticResource HeaderTextBlockStyle}" Margin="10,-366.82,751,365.204" FontSize="24" />
         <TextBlock Text="Console Information" Style="{StaticResource HeaderTextBlockStyle}" Margin="559,-566.051,23,564.897" FontSize="24" />
-        <ListBox HorizontalAlignment="Left" Height="142" VerticalAlignment="Top" Width="208" Margin="559,-584,0,0">
-            <ComboBoxItem Content="Active Threads:" FontSize="11"/>
-            <ComboBoxItem Content="CPU Temp:" FontSize="11"/>
-            <ComboBoxItem Content="GPU Temp:" FontSize="11"/>
-            <ComboBoxItem Content="RAM Temp:" FontSize="11"/>
-            <ComboBoxItem Content="MB Temp:" FontSize="11"/>
+        <ListBox HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="208" Margin="559,-584,0,0" Name="consoleInfoBox" FontSize="12" BorderThickness="1" BorderBrush="#FF4732CD" Background="#FF191818">
+            <ComboBoxItem Content="CPU Temp:" FontSize="16" Name="cpuTemp" FontFamily="SimSun"/>
+            <ComboBoxItem Content="GPU Temp:" FontSize="16" Name="gpuTemp" FontFamily="SimSun"/>
+            <ComboBoxItem Content="RAM Temp:" FontSize="16" Name="ramTemp" FontFamily="SimSun"/>
+            <ComboBoxItem Content="MB Temp:" FontSize="16" Name="mbTemp" FontFamily="SimSun"/>
         </ListBox>
         <TextBlock Text="Current Title" Style="{StaticResource HeaderTextBlockStyle}" Margin="559,-452,104,449.859" FontSize="24" />
         <Image HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="105" Margin="559,-432,0,0" Source="Resources/bo2.jpg"/>
         <TextBlock Text="Name: Call of Duty®: Black Ops II" Style="{StaticResource HeaderTextBlockStyle}" Margin="559,-492.782,48,491.222" FontSize="12" />
         <TextBlock Text="ID: 415608C3" Style="{StaticResource HeaderTextBlockStyle}" Margin="559,-515.182,155,513.822" FontSize="12" />
-        <Button Content="Q" Style="{StaticResource AccentButtonStyle}" Margin="693,-602,0,606" Height="28" Width="33" FontFamily="Wingdings 3" FontSize="16" />
+        <Button Content="Q" Style="{StaticResource AccentButtonStyle}" Margin="693,-602,0,606" Height="28" Width="33" FontFamily="Wingdings 3" FontSize="16" Background="#FF4732CD" />
         <TextBlock Text="XNotify" Style="{StaticResource HeaderTextBlockStyle}" Margin="12,-553.923,695,551.935" FontSize="24" />
         <TextBox HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="173" Margin="100,-548.011,0,0"/>
-        <Button Content="Send" Style="{StaticResource AccentButtonStyle}" Margin="278,-572,0,572" />
+        <Button Content="Send" Style="{StaticResource AccentButtonStyle}" Margin="278,-572,0,572" Background="#FF4732CD" />
         <TextBlock Text="Type" Style="{StaticResource HeaderTextBlockStyle}" Margin="12,-646.011,695,645.834" FontSize="10" />
         <ComboBox HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="83" Margin="12,-665,0,0"/>
-        <Border BorderBrush="LimeGreen" BorderThickness="1" HorizontalAlignment="Left" Height="1" Margin="12,-712,0,0" VerticalAlignment="Top" Width="315"/>
+        <Border BorderBrush="#FF4732CD" BorderThickness="1" HorizontalAlignment="Left" Height="1" Margin="12,-712,0,0" VerticalAlignment="Top" Width="315"/>
         <TextBlock Text="Message" Style="{StaticResource HeaderTextBlockStyle}" Margin="100,-730.834,607,728.434" FontSize="10" />
         <ui:ProgressRing x:Name="connectProgressRing" Margin="333,-963,425,931" Height="32" Width="32"/>
 
