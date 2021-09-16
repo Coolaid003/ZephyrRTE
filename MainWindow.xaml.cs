@@ -16,7 +16,8 @@ namespace x360Tool
     {
         // Our console object. Should get initialized on connect.
         private IXboxConsole _myConsole;
-        private FontFamily infoFontFamily = new FontFamily("SimSun");
+        private bool isConnected = true; // Keep a global state of connection status.
+        private FontFamily _infoFontFamily = new FontFamily("SimSun");
 
         public MainWindow()
         {
@@ -30,11 +31,15 @@ namespace x360Tool
 
             await Task.Delay(100); // This delay is here just so the progress ring can properly render first.
 
-            if (JRPC.Connect(_myConsole, out _myConsole,
-                addyInput.Text != "" ? addyInput.Text : "default")) // Probably have XNotify's here sooner or later.
+            if (JRPC.Connect(_myConsole, out _myConsole, addyInput.Text != "" ? addyInput.Text : "default"))
             {
                 MessageBox.Show("Your console was connected successfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.None);
+                addyInput.Text = "default";
                 Title = "ZephyrRTE | Connected";
+                connectButton.IsEnabled = false;
+                isConnected = true;
+
+                JRPC.XNotify(_myConsole, "ZephyrRTE: Successfully Connected!");
             }
             else
             {
@@ -47,13 +52,17 @@ namespace x360Tool
             connectProgressRing.IsActive = false;
             connectProgressRing.Visibility = Visibility.Collapsed;
 
+            // Keep a constant loop to retrieve console and title information.
             for (;;)
             {
-                consoleInfoBox.Items[0] = new ComboBoxItem() { FontFamily = infoFontFamily, FontSize = 16, Content = $"CPU Temp: {JRPC.GetTemperature(_myConsole, JRPC.TemperatureType.CPU)} °C" };
-                consoleInfoBox.Items[1] = new ComboBoxItem() { FontFamily = infoFontFamily, FontSize = 16, Content = $"GPU Temp: {JRPC.GetTemperature(_myConsole, JRPC.TemperatureType.GPU)} °C" };
-                consoleInfoBox.Items[2] = new ComboBoxItem() { FontFamily = infoFontFamily, FontSize = 16, Content = $"RAM Temp: {JRPC.GetTemperature(_myConsole, JRPC.TemperatureType.EDRAM)} °C" };
-                consoleInfoBox.Items[3] = new ComboBoxItem() { FontFamily = infoFontFamily, FontSize = 16, Content = $"MB Temp: {JRPC.GetTemperature(_myConsole, JRPC.TemperatureType.MotherBoard)} °C" };
-                await Task.Delay(2000); // Update console information every 2 seconds.
+                consoleInfoBox.Items[0] = new ComboBoxItem() { FontFamily = _infoFontFamily, FontSize = 16, Content = $"CPU Temp: {JRPC.GetTemperature(_myConsole, JRPC.TemperatureType.CPU)} °C" };
+                consoleInfoBox.Items[1] = new ComboBoxItem() { FontFamily = _infoFontFamily, FontSize = 16, Content = $"GPU Temp: {JRPC.GetTemperature(_myConsole, JRPC.TemperatureType.GPU)} °C" };
+                consoleInfoBox.Items[2] = new ComboBoxItem() { FontFamily = _infoFontFamily, FontSize = 16, Content = $"RAM Temp: {JRPC.GetTemperature(_myConsole, JRPC.TemperatureType.EDRAM)} °C" };
+                consoleInfoBox.Items[3] = new ComboBoxItem() { FontFamily = _infoFontFamily, FontSize = 16, Content = $"MB Temp: {JRPC.GetTemperature(_myConsole, JRPC.TemperatureType.MotherBoard)} °C" };
+
+                // title information here.
+
+                await Task.Delay(2000); // Updates information every 2 seconds, efficiency reasons.
             }
         }
     }
