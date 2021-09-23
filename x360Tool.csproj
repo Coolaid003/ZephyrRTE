@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameTitleManager.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,6 +102,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="titles.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -114,10 +116,14 @@
     <PackageReference Include="ModernWpfUI">
       <Version>0.9.4</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLLs\JRPC.dll" />
     <Content Include="DLLs\xdevkit.dll" />
+    <Resource Include="Resources\dash.png" />
     <Resource Include="Resources\zephyr.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

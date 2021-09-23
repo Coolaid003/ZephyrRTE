@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using XDevkit;
 using JRPC_Client;
 using System.Windows.Forms;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace x360Tool
@@ -18,6 +21,8 @@ namespace x360Tool
         private IXboxConsole _myConsole;
         private bool isConnected = true; // Keep a global state of connection status.
         private FontFamily _infoFontFamily = new FontFamily("SimSun");
+        private GameTitleManager _gameTitleManager = new GameTitleManager();
+        private GameTitle _currentTitle;
 
         public MainWindow()
         {
@@ -39,6 +44,7 @@ namespace x360Tool
                 connectButton.IsEnabled = false;
                 isConnected = true;
 
+                _currentTitle = _gameTitleManager.GetTitleByID(JRPC.XamGetCurrentTitleId(_myConsole));
                 JRPC.XNotify(_myConsole, "ZephyrRTE: Successfully Connected!");
             }
             else
@@ -64,6 +70,14 @@ namespace x360Tool
 
                 await Task.Delay(2000); // Updates information every 2 seconds, efficiency reasons.
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //titleName.Text = _currentTitle.Title;
+            //titleId.Text = _currentTitle.ID.ToString();
+            titleId.Text = "000000000";
+            //titleImage.Source = new BitmapImage(new Uri($"/x360Tool;component/{_currentTitle.IconPath}", UriKind.Relative));
         }
     }
 }
