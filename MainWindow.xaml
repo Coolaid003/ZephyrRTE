@@ -9,7 +9,7 @@
         Title="ZephyrRTE | Not Connected" Height="450" Width="800"
         xmlns:controls="http://schemas.modernwpf.com/2019"
         Closing="Window_Close"
-        controls:WindowHelper.UseModernWindowStyle="True" ResizeMode="CanMinimize" Icon="Resources/x360.png">
+        controls:WindowHelper.UseModernWindowStyle="True" ResizeMode="CanMinimize" Icon="Resources/zephyr.png">
     <controls:SimpleStackPanel Spacing="24">
         <TextBlock Text="ZephyrRTE" Style="{StaticResource HeaderTextBlockStyle}" Margin="88,-9,490,7" FontSize="44" />
         <Button Content="Games" Margin="305,-64,0,64" Width="60" />
