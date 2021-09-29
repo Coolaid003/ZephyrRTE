@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,8 +7,9 @@ using XDevkit;
 using JRPC_Client;
 using System.Windows.Forms;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using MessageBox = System.Windows.Forms.MessageBox;
+using System.Windows.Media.Imaging;
+using DiscordRPC;
 
 namespace x360Tool
 {
@@ -20,15 +21,35 @@ namespace x360Tool
         // Our console object. Should get initialized on connect.
         private IXboxConsole _myConsole;
         private bool isConnected = true; // Keep a global state of connection status.
-        private FontFamily _infoFontFamily = new FontFamily("SimSun");
-        private GameTitleManager _gameTitleManager = new GameTitleManager();
+        private readonly FontFamily _infoFontFamily = new FontFamily("SimSun");
+        private readonly GameTitleManager _gameTitleManager = new GameTitleManager();
         private GameTitle _currentTitle;
+        public DiscordRpcClient client;
 
         public MainWindow()
         {
             InitializeComponent();
+            client = new DiscordRpcClient("891182357896384542");  //Creates the client
+            client.Initialize();
+            client.SetPresence(new RichPresence()
+            {
+                Details = "Not Connected",
+                State = "Main Menu",
+                Assets = new Assets()
+                {
+                    LargeImageKey = "zephyr",
+                    LargeImageText = "Zephyr Services",
+                },
+                Timestamps = new Timestamps()
+                {
+                    Start = DateTime.UtcNow,
+                }
+            });
         }
 
+        /// <summary>
+        /// Console connect button click. This is the main program logic.
+        /// </summary>
         private async void ConnectButton_OnClick(object sender, RoutedEventArgs e)
         {
             connectProgressRing.IsActive = true;
@@ -44,19 +65,34 @@ namespace x360Tool
                 connectButton.IsEnabled = false;
                 isConnected = true;
 
-                _currentTitle = _gameTitleManager.GetTitleByID(JRPC.XamGetCurrentTitleId(_myConsole));
                 JRPC.XNotify(_myConsole, "ZephyrRTE: Successfully Connected!");
+
+                UpdateTitleBox();
+                client.SetPresence(new RichPresence()
+                {
+                    Details = "Connected",
+                    State = $"Currently Playing: {_currentTitle.Title}",
+                    Assets = new Assets()
+                    {
+                        LargeImageKey = "zephyr",
+                        LargeImageText = "Zephyr Services",
+                    },
+                    Timestamps = new Timestamps()
+                    {
+                        Start = DateTime.UtcNow,
+                    }
+                });
             }
             else
             {
                 MessageBox.Show("Could not connect on this IP.", "Connection Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 connectProgressRing.IsActive = false;
-                connectProgressRing.Visibility = Visibility.Collapsed;
+                connectProgressRing.Visibility = Visibility.Hidden;
                 return;
             }
 
             connectProgressRing.IsActive = false;
-            connectProgressRing.Visibility = Visibility.Collapsed;
+            connectProgressRing.Visibility = Visibility.Hidden;
 
             // Keep a constant loop to retrieve console and title information.
             for (;;)
@@ -66,18 +102,67 @@ namespace x360Tool
                 consoleInfoBox.Items[2] = new ComboBoxItem() { FontFamily = _infoFontFamily, FontSize = 16, Content = $"RAM Temp: {JRPC.GetTemperature(_myConsole, JRPC.TemperatureType.EDRAM)} °C" };
                 consoleInfoBox.Items[3] = new ComboBoxItem() { FontFamily = _infoFontFamily, FontSize = 16, Content = $"MB Temp: {JRPC.GetTemperature(_myConsole, JRPC.TemperatureType.MotherBoard)} °C" };
 
-                // title information here.
+                // Title change checks.
+                if (_currentTitle != null && _gameTitleManager.TitleChanged(ref _myConsole, ref _currentTitle))
+                {
+                    UpdateTitleBox();
+                    client.SetPresence(new RichPresence()
+                    {
+                        Details = "Connected",
+                        State = $"Currently Playing: {_currentTitle.Title}",
+                        Assets = new Assets()
+                        {
+                            LargeImageKey = "zephyr",
+                            LargeImageText = "Zephyr Services",
+                        },
+                        Timestamps = new Timestamps()
+                        {
+                            Start = DateTime.UtcNow,
+                        }
+                    });
+                }
 
                 await Task.Delay(2000); // Updates information every 2 seconds, efficiency reasons.
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Main window close event, do cleanup here mostly.
+        /// </summary>
+        private void Window_Close(object sender, CancelEventArgs e)
         {
-            //titleName.Text = _currentTitle.Title;
-            //titleId.Text = _currentTitle.ID.ToString();
-            titleId.Text = "000000000";
-            //titleImage.Source = new BitmapImage(new Uri($"/x360Tool;component/{_currentTitle.IconPath}", UriKind.Relative));
+            client.Dispose();
+        }
+
+        /// <summary>
+        /// XNotify button click event to send a message to the console.
+        /// </summary>
+        private void notifyBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Button click event to manually refresh the current title.
+        /// </summary>
+        private void refreshTitleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateTitleBox();
+        }
+
+        /// <summary>
+        /// Updates the title information in the box with the most recent initialized title.
+        /// </summary>
+        private void UpdateTitleBox()
+        {
+            _currentTitle = _gameTitleManager.GetTitleById(JRPC.XamGetCurrentTitleId(_myConsole));
+
+            if (_currentTitle == null)
+                _currentTitle = _gameTitleManager.GetTitleById(0);
+
+            titleName.Text = _currentTitle.Title;
+            titleId.Text = _currentTitle.ID.ToString();
+            titleImage.Source = new BitmapImage(new Uri($"/x360Tool;component/{_currentTitle.IconPath}", UriKind.Relative));
         }
     }
 }

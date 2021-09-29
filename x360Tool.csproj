@@ -102,7 +102,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="titles.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -113,6 +112,9 @@
     <Resource Include="Resources\x360.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DiscordRichPresence">
+      <Version>1.0.175</Version>
+    </PackageReference>
     <PackageReference Include="ModernWpfUI">
       <Version>0.9.4</Version>
     </PackageReference>

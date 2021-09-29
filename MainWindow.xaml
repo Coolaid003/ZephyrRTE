@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="ZephyrRTE | Not Connected" Height="450" Width="800"
         xmlns:controls="http://schemas.modernwpf.com/2019"
+        Closing="Window_Close"
         controls:WindowHelper.UseModernWindowStyle="True" ResizeMode="CanMinimize" Icon="Resources/x360.png">
     <controls:SimpleStackPanel Spacing="24">
         <TextBlock Text="ZephyrRTE" Style="{StaticResource HeaderTextBlockStyle}" Margin="88,-9,490,7" FontSize="44" />
@@ -34,15 +35,15 @@
         <Image Name="titleImage" HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="105" Margin="612,-446,0,0"/>
         <TextBlock Name="titleName" Text="" Style="{StaticResource HeaderTextBlockStyle}" Margin="559,-510,23,507" FontSize="14" FontWeight="Bold" TextAlignment="Center" />
         <TextBlock Text="ID:" Style="{StaticResource HeaderTextBlockStyle}" Margin="581,-531,189,529" FontSize="12" />
-        <Button Name="refreshTitleBtn" Content="Q" Style="{StaticResource AccentButtonStyle}" Margin="693,-630,0,634" Height="28" Width="33" FontFamily="Wingdings 3" FontSize="16" Background="#FF4732CD" />
+        <Button Name="refreshTitleBtn" Content="Q" Style="{StaticResource AccentButtonStyle}" Margin="693,-630,0,634" Height="28" Width="33" FontFamily="Wingdings 3" FontSize="16" Background="#FF4732CD" Click="refreshTitleBtn_Click" />
         <TextBlock Text="XNotify" Style="{StaticResource HeaderTextBlockStyle}" Margin="11,-558,696,555" FontSize="24" />
         <TextBox HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="173" Margin="99,-550,0,0"/>
-        <Button Content="Send" Style="{StaticResource AccentButtonStyle}" Margin="277,-575,0,575" Background="#FF4732CD" Click="Button_Click" />
+        <Button Name="notifyBtn" Content="Send" Style="{StaticResource AccentButtonStyle}" Margin="277,-575,0,575" Background="#FF4732CD" Click="notifyBtn_Click" />
         <TextBlock Text="Type" Style="{StaticResource HeaderTextBlockStyle}" Margin="11,-649,696,651" FontSize="10" />
         <ComboBox HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="83" Margin="11,-669,0,0"/>
         <Border BorderBrush="#FF4732CD" BorderThickness="1" HorizontalAlignment="Left" Height="1" Margin="11,-716,0,0" VerticalAlignment="Top" Width="315"/>
         <TextBlock Text="Message" Style="{StaticResource HeaderTextBlockStyle}" Margin="99,-736,608,730" FontSize="10" />
         <ui:ProgressRing x:Name="connectProgressRing" Margin="333,-983,425,951" Height="32" Width="32"/>
-        <TextBlock x:Name="titleId" Text="2348234" Style="{StaticResource HeaderTextBlockStyle}" Margin="596,-900,52,897" FontSize="12" Width="146" Height="16" />
+        <TextBlock x:Name="titleId" Style="{StaticResource HeaderTextBlockStyle}" Margin="596,-900,52,897" FontSize="12" Width="146" Height="16" />
     </controls:SimpleStackPanel>
 </Window>
