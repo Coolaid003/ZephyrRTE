@@ -10,6 +10,7 @@ using System.Windows.Media;
 using MessageBox = System.Windows.Forms.MessageBox;
 using System.Windows.Media.Imaging;
 using DiscordRPC;
+using Button = DiscordRPC.Button;
 
 namespace x360Tool
 {
@@ -43,6 +44,10 @@ namespace x360Tool
                 Timestamps = new Timestamps()
                 {
                     Start = DateTime.UtcNow,
+                },
+                Buttons = new Button[]
+                {
+                    new Button() { Label = "Join the Discord", Url = "https://discord.com/invite/2eH37B9Tym" }
                 }
             });
         }
@@ -80,6 +85,10 @@ namespace x360Tool
                     Timestamps = new Timestamps()
                     {
                         Start = DateTime.UtcNow,
+                    },
+                    Buttons = new Button[]
+                    {
+                        new Button() { Label = "Join the Discord", Url = "https://discord.com/invite/2eH37B9Tym" }
                     }
                 });
             }
@@ -118,6 +127,10 @@ namespace x360Tool
                         Timestamps = new Timestamps()
                         {
                             Start = DateTime.UtcNow,
+                        },
+                        Buttons = new Button[]
+                        {
+                            new Button() { Label = "Join the Discord", Url = "https://discord.com/invite/2eH37B9Tym" }
                         }
                     });
                 }
