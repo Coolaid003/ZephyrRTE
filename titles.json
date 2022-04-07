@@ -1,0 +1,17 @@
+[
+  {
+    "Title": "Unsupported Game",
+    "ID": 0,
+    "IconPath": "Resources/dash.png"
+  },
+  {
+    "Title": "Xbox Dashboard",
+    "ID": 4294838225,
+    "IconPath": "Resources/dash.png"
+  },
+  {
+    "Title": "Call of Duty: Black Ops II",
+    "ID": 1096157379,
+    "IconPath": "Resources/bo2.jpg"
+  }
+]
